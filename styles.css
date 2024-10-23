@@ -61,3 +61,22 @@ p {
 button {
   margin: 20px;
 }
+
+
+
+.image {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    transition: border-color 0.3s;
+    cursor: grab;
+}
+
+.image:hover {
+	border-color: #888;
+}
+
+.image.dragging {
+    opacity: 0.5;
+}
+
+
