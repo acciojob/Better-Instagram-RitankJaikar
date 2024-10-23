@@ -3,22 +3,28 @@ const images = document.querySelectorAll(".image");
 let dragSourceElement= null;
 
 function handleDragStart(e) {
+	console.log("----------DragStart---------");
 	dragSourceElement= this;
-	this.classList.add("dragging");
+	console.log(dragSourceElement);
 }
 
 function handleDragOver(e) {
+	console.log("---DragOver---");
 	e.preventDefault();
 }
 
 function handleDrop(e) {
+	console.log("---DragDrop---");
 	e.preventDefault();
-	if(e.target.classList.contains("image")) {
-		[this.innerHTML, dragSourceElement.innerHTML] = [dragSourceElement.innerHTML, this.innerHTML]
+	
+	if(e.target.classList.contains("image")  &&  e.target !==dragSourceElement) {
+		let clone1= dragSourceElement.cloneNode(true);
+		let clone2= e.target.cloneNode(true);
+		e.target.parentNode.insertBefore(clone1, e.target);
+		e.target.remove();
+		dragSourceElement.parentNode.insertBefore(clone2, dragSourceElement);
+		dragSourceElement.remove();
 	}
-
-	this.classList.remove("dragging");
-	dragSourceElement.classList.remove("dragging");
 }
 
 images.forEach(image => {
@@ -26,6 +32,12 @@ images.forEach(image => {
 	image.addEventListener("dragover", handleDragOver);
 	image.addEventListener("drop", handleDrop);
 	image.addEventListener("dragend", () => {
-		image.classList.remove("dragging");
+		console.log("---DragEnd---");
+	})
+	image.addEventListener("dragenter", () => {
+		console.log("---DragEnter---");
+	})
+	image.addEventListener("dragleave", () => {
+		console.log("---DragLeave---");
 	})
 })
