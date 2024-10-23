@@ -4,7 +4,7 @@ let dragSourceElement = null;
 function handleDragStart(e) {
     console.log("----------DragStart---------");
     dragSourceElement = this;
-    console.log(dragSourceElement);
+    //console.log(dragSourceElement);
 }
 
 function handleDragOver(e) {
